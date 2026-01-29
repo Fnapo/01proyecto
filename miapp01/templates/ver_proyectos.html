@@ -1,0 +1,46 @@
+{% extends "base.html" %} {% block title %} Ver Proyectos {% endblock %}
+<!-- inicio del bloque header  -->
+{% block body_class %}{% endblock %}
+<!-- Inicio del bloque de contenido -->
+{% block content %} {% with matriz="111111111111111" %}
+<!-- inicio if -->
+<header class="sticky-top bg-warning">
+  <div class="container">
+    <div class="row">
+      <h1 class="text-center mb-4">Página de Proyectos</h1>
+      <a class="btn btn-primary mb-3" href="{% url 'index' %}">
+        Volver al Inicio
+      </a>
+    </div>
+  </div>
+</header>
+<main class="overflow-y-scroll altura-80">
+  {% if proyectos %}
+  <div class="container">
+    <table class="table table-striped">
+      <thead class="sticky-top">
+        <tr>
+          <th>ID</th>
+          <th>Nombre</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for veces in matriz %}
+        <!-- Comentario -->
+        {% for proyecto in proyectos %}
+        <tr>
+          <td>{{ proyecto.id }}</td>
+          <td>{{ proyecto.nombre }}</td>
+        </tr>
+        {% endfor %}
+        <!-- Comentario -->
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  {% else %}
+  <p>No hay proyectos disponibles.</p>
+  {% endif %}
+</main>
+<!-- fin bloque  -->
+{% endwith %} {% endblock %}
