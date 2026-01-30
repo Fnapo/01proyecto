@@ -28,7 +28,7 @@ def ver_proyectos(request):
     proyectos = Proyecto.objects.values()
     return render(
         request,
-        "ver_proyectos.html",
+        "proyectos/ver_proyectos.html",
         {"proyectos": proyectos},
     )
 
@@ -56,6 +56,15 @@ def tareas(request):
     return JsonResponse(
         lista_tareas,
         safe=False,
+    )
+
+
+def ver_tareas(request):
+    tareas = Tarea.objects.values()
+    return render(
+        request,
+        "tareas/ver_tareas.html",
+        {"tareas": tareas},
     )
 
 

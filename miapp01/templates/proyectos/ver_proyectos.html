@@ -1,10 +1,7 @@
 {% extends "base.html" %} {% block title %} Ver Proyectos {% endblock %}
-<!-- inicio del bloque header  -->
-{% block body_class %}{% endblock %}
 <!-- Inicio del bloque de contenido -->
 {% block content %} {% with matriz="111111111111111" %}
-<!-- inicio if -->
-<header class="sticky-top bg-warning">
+<header class="sticky-top bg-warning altura-20 d-flex align-items-center">
   <div class="container">
     <div class="row">
       <h1 class="text-center mb-4">Página de Proyectos</h1>
@@ -14,7 +11,8 @@
     </div>
   </div>
 </header>
-<main class="overflow-y-scroll altura-80">
+<main class="overflow-y-auto altura-80 bg-secondary text-white">
+  <!-- inicio if -->
   {% if proyectos %}
   <div class="container">
     <table class="table table-striped">

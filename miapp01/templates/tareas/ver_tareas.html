@@ -1,0 +1,41 @@
+{% extends "base.html" %} {% block title %} Ver Tareas {% endblock %}
+
+<!-- Inicio del bloque de contenido -->
+{% block content %}
+<header class="sticky-top bg-warning altura-20 d-flex align-items-center">
+  <div class="container">
+    <div class="row">
+      <h1 class="text-center mb-4">Página de Tareas</h1>
+      <a class="btn btn-primary mb-3" href="{% url 'index' %}">
+        Volver al Inicio
+      </a>
+    </div>
+  </div>
+</header>
+<main class="overflow-y-auto altura-80 bg-secondary text-white">
+  <!-- inicio if -->
+  {% if tareas %}
+  <div class="container">
+    <table class="table table-striped">
+      <thead class="sticky-top">
+        <tr>
+          <th>ID</th>
+          <th>Nombre</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for tarea in tareas %}
+        <tr>
+          <td>{{ tarea.id }}</td>
+          <td>{{ tarea.nombre }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  {% else %}
+  <div class="container h-100 d-flex justify-content-center align-items-center">
+    <p>No hay tareas disponibles.</p>
+  </div>
+</main>
+{% endif %} {% endblock %}

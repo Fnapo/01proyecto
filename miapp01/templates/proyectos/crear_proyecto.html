@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block title %} Crear Un Proyecto {% endblock %}
+<!-- Inicio del bloque de contenido -->
+{% block content %}
+<header class="sticky-top bg-warning altura-20 d-flex align-items-center">
+  <div class="container">
+    <div class="row">
+      <h1 class="text-center mb-4">Crear un Nuevo Proyecto</h1>
+      <a class="btn btn-primary mb-3" href="{% url 'index' %}">
+        Volver al Inicio
+      </a>
+    </div>
+  </div>
+</header>
+<main class="overflow-y-auto altura-80 bg-secondary text-white">
+  <div class="container">
+    <form method="post" action="{% url 'crear_proyecto' %}">
+      {% csrf_token %}
+      <div class="mb-3">
+        <label for="nombre" class="form-label">Nombre del Proyecto:</label>
+        <input
+          type="text"
+          class="form-control"
+          id="nombre"
+          name="nombre"
+          required
+        />
+      </div>
+      <div class="mb-3">
+        <label for="descripcion" class="form-label">Descripción:</label>
+        <textarea
+          class="form-control"
+          id="descripcion"
+          name="descripcion"
+          rows="4"
+          required
+        ></textarea>
+      </div>
+      <div class="mb-3 d-flex justify-content-between">
+      <button type="submit" class="btn btn-success col-4 col-md-3">Crear Proyecto</button>
+      <button type="reset" class="btn btn-secondary col-4 col-md-3">Limpiar</button>
+      </div>
+    </form>
+  </div>
+</main>
+<!-- fin bloque  -->
+{% endblock %}

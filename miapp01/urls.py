@@ -10,4 +10,5 @@ ulrspatterns = [
     path("ver_proyectos/", views.ver_proyectos, name="ver_proyectos"),
     path("tareas/", views.tareas, name="tareas"),
     path("tareas/<int:tarea_id>/", views.buscar_tarea),
+    path("ver_tareas/", views.ver_tareas, name="ver_tareas"),
 ]
