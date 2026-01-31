@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse, JsonResponse
 from .models import Proyecto, Tarea
 
@@ -51,6 +51,18 @@ def buscar_proyecto(request, proyecto_id):
         )
 
 
+def crear_proyecto(request):
+    if request.method == "POST":
+        nombre = request.POST.get("nombre")
+        descripcion = request.POST.get("descripcion")
+        Proyecto.objects.create(
+            nombre=nombre,
+            descripcion=descripcion,
+        )
+        return redirect("ver_proyectos")
+    return render(request, "proyectos/crear_proyecto.html")
+
+
 def tareas(request):
     lista_tareas = list(Tarea.objects.values())
     return JsonResponse(
@@ -66,6 +78,21 @@ def ver_tareas(request):
         "tareas/ver_tareas.html",
         {"tareas": tareas},
     )
+
+
+def crear_tarea(request):
+    if request.method == "POST":
+        titulo = request.POST.get("titulo")
+        descripcion = request.POST.get("descripcion")
+        proyecto_id = request.POST.get("proyecto_id")
+        Tarea.objects.create(
+            titulo=titulo,
+            descripcion=descripcion,
+            proyecto_id=proyecto_id,
+        )
+        return redirect("ver_tareas")
+    proyectos = Proyecto.objects.values()
+    return render(request, "tareas/crear_tarea.html", {"proyectos": proyectos})
 
 
 def buscar_tarea(request, tarea_id):

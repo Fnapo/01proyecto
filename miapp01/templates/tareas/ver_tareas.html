@@ -6,9 +6,16 @@
   <div class="container">
     <div class="row">
       <h1 class="text-center mb-4">Página de Tareas</h1>
-      <a class="btn btn-primary mb-3" href="{% url 'index' %}">
-        Volver al Inicio
-      </a>
+      <div class="justify-content-around d-flex">
+        <a class="btn btn-primary mb-3 col-5 col-md-3" href="{% url 'index' %}">
+          Volver al Inicio
+        </a>
+        <a
+          class="btn btn-primary mb-3 col-5 col-md-3"
+          href="{% url 'crear_tarea' %}"
+          >Crear Tarea
+        </a>
+      </div>
     </div>
   </div>
 </header>
@@ -20,14 +27,14 @@
       <thead class="sticky-top">
         <tr>
           <th>ID</th>
-          <th>Nombre</th>
+          <th>Título</th>
         </tr>
       </thead>
       <tbody>
         {% for tarea in tareas %}
         <tr>
           <td>{{ tarea.id }}</td>
-          <td>{{ tarea.nombre }}</td>
+          <td>{{ tarea.titulo }}</td>
         </tr>
         {% endfor %}
       </tbody>
