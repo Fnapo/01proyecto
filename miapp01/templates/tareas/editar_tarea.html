@@ -1,0 +1,79 @@
+{% extends "base.html" %} {% block title %} Editar Tarea {% endblock %}
+<!-- Inicio del bloque de contenido -->
+{% block content %}
+<header class="sticky-top bg-warning altura-20 d-flex align-items-center">
+  <div class="container">
+    <div class="row">
+      <h1 class="text-center mb-4">Editar Tarea</h1>
+      <div class="justify-content-around d-flex">
+        <a class="btn btn-primary mb-3 col-5 col-md-3" href="{% url 'index' %}">
+          Volver al Inicio
+        </a>
+        <a
+          class="btn btn-primary mb-3 col-5 col-md-3"
+          href="{% url 'ver_tareas' %}"
+          >Ver Tareas
+        </a>
+      </div>
+    </div>
+  </div>
+</header>
+<main
+  class="overflow-y-auto altura-80 bg-secondary text-white align-items-center d-flex justify-content-center"
+>
+  <div class="container bg-light text-dark p-4 rounded">
+    <form method="post" action="{% url 'editar_tarea' tarea.id %}">
+      {% csrf_token %}
+      <div class="mb-3">
+        <label for="titulo" class="form-label">Título de la Tarea:</label>
+        <input
+          type="text"
+          name="titulo"
+          maxlength="100"
+          class="form-control"
+          required
+          id="titulo"
+          value="{{ tarea.titulo }}"
+        />
+      </div>
+      <div class="mb-3">
+        <label for="descripcion" class="form-label">Descripción:</label>
+        <textarea
+          name="descripcion"
+          cols="40"
+          rows="5"
+          class="form-control"
+          required
+          id="descripcion"
+        >
+{{ tarea.descripcion }}</textarea
+        >
+      </div>
+      <div class="mb-3">
+        <label for="proyecto_id" class="form-label">Proyecto Asociado:</label>
+        <select name="proyecto_id" class="form-select" id="proyecto_id">
+          {% for proyecto in proyectos %}
+          <option
+            value="{{ proyecto.id }}"
+            {% if proyecto.id == tarea.proyecto_id %}
+            selected
+            {% endif %}
+          >
+            {{ proyecto.nombre }}
+          </option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="mb-3 d-flex justify-content-around">
+        <button type="submit" class="btn btn-success col-4 col-md-3">
+          Guardar Cambios
+        </button>
+        <button type="reset" class="btn btn-secondary col-4 col-md-3">
+          Limpiar
+        </button>
+      </div>
+    </form>
+  </div>
+</main>
+<!-- fin bloque  -->
+{% endblock %}

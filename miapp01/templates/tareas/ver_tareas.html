@@ -28,6 +28,8 @@
         <tr>
           <th>ID</th>
           <th>Título</th>
+          <th>Proyecto</th>
+          <th>Acciones</th>
         </tr>
       </thead>
       <tbody>
@@ -35,6 +37,14 @@
         <tr>
           <td>{{ tarea.id }}</td>
           <td>{{ tarea.titulo }}</td>
+          <td>{{ tarea.proyecto_id }}</td>
+          <td>
+            <a
+              class="btn btn-sm btn-warning"
+              href="{% url 'editar_tarea' tarea.id %}"
+              >Editar</a
+            >
+          </td>
         </tr>
         {% endfor %}
       </tbody>

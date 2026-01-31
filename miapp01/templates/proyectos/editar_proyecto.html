@@ -1,0 +1,63 @@
+{% extends "base.html" %} {% block title %} Editar Proyecto {% endblock %}
+<!-- Inicio del bloque de contenido -->
+{% block content %}
+<header class="sticky-top bg-warning altura-20 d-flex align-items-center">
+  <div class="container">
+    <div class="row">
+      <h1 class="text-center mb-4">Editar Proyecto</h1>
+      <div class="justify-content-around d-flex">
+        <a class="btn btn-primary mb-3 col-5 col-md-3" href="{% url 'index' %}">
+          Volver al Inicio
+        </a>
+        <a
+          class="btn btn-primary mb-3 col-5 col-md-3"
+          href="{% url 'ver_proyectos' %}"
+          >Ver Proyectos
+        </a>
+      </div>
+    </div>
+  </div>
+</header>
+<main
+  class="overflow-y-auto altura-80 bg-secondary text-white align-items-center d-flex justify-content-center"
+>
+  <div class="container bg-light text-dark p-4 rounded">
+    <form method="post" action="{% url 'editar_proyecto' proyecto.id %}">
+      {% csrf_token %}
+      <div class="mb-3">
+        <label for="nombre" class="form-label">Nombre del Proyecto:</label>
+        <input
+          type="text"
+          class="form-control"
+          id="nombre"
+          name="nombre"
+          maxlength="250"
+          value="{{ proyecto.nombre }}"
+          required
+        />
+      </div>
+      <div class="mb-3">
+        <label for="descripcion" class="form-label">Descripción:</label>
+        <textarea
+          class="form-control"
+          id="descripcion"
+          name="descripcion"
+          rows="4"
+          required
+        >
+{{ proyecto.descripcion }}</textarea
+        >
+      </div>
+      <div class="mb-3 d-flex justify-content-around">
+        <button type="submit" class="btn btn-success col-4 col-md-3">
+          Guardar Cambios
+        </button>
+        <button type="reset" class="btn btn-secondary col-4 col-md-3">
+          Limpiar
+        </button>
+      </div>
+    </form>
+  </div>
+</main>
+<!-- fin bloque  -->
+{% endblock %}

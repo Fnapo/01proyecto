@@ -63,6 +63,24 @@ def crear_proyecto(request):
     return render(request, "proyectos/crear_proyecto.html")
 
 
+def editar_proyecto(request, proyecto_id):
+    try:
+        proyecto = Proyecto.objects.get(id=proyecto_id)
+    except Proyecto.DoesNotExist:
+        return JsonResponse(
+            {"error": "Proyecto no encontrado"},
+            status=404,
+        )
+
+    if request.method == "POST":
+        proyecto.nombre = request.POST.get("nombre")
+        proyecto.descripcion = request.POST.get("descripcion")
+        proyecto.save()
+        return redirect("ver_proyectos")
+
+    return render(request, "proyectos/editar_proyecto.html", {"proyecto": proyecto})
+
+
 def tareas(request):
     lista_tareas = list(Tarea.objects.values())
     return JsonResponse(
@@ -93,6 +111,28 @@ def crear_tarea(request):
         return redirect("ver_tareas")
     proyectos = Proyecto.objects.values()
     return render(request, "tareas/crear_tarea.html", {"proyectos": proyectos})
+
+
+def editar_tarea(request, tarea_id):
+    try:
+        tarea = Tarea.objects.get(id=tarea_id)
+    except Tarea.DoesNotExist:
+        return JsonResponse(
+            {"error": "Tarea no encontrada"},
+            status=404,
+        )
+
+    if request.method == "POST":
+        tarea.titulo = request.POST.get("titulo")
+        tarea.descripcion = request.POST.get("descripcion")
+        tarea.proyecto_id = request.POST.get("proyecto_id")
+        tarea.save()
+        return redirect("ver_tareas")
+
+    proyectos = Proyecto.objects.values()
+    return render(
+        request, "tareas/editar_tarea.html", {"tarea": tarea, "proyectos": proyectos}
+    )
 
 
 def buscar_tarea(request, tarea_id):

@@ -27,6 +27,7 @@
         <tr>
           <th>ID</th>
           <th>Nombre</th>
+          <th>Acciones</th>
         </tr>
       </thead>
       <tbody>
@@ -36,6 +37,13 @@
         <tr>
           <td>{{ proyecto.id }}</td>
           <td>{{ proyecto.nombre }}</td>
+          <td>
+            <a
+              class="btn btn-warning"
+              href="{% url 'editar_proyecto' proyecto.id %}"
+              >Editar</a
+            >
+          </td>
         </tr>
         {% endfor %}
         <!-- Comentario -->
