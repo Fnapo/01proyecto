@@ -1,23 +1,17 @@
 {% extends "base.html" %} {% block title %} Crear Tarea {% endblock %}
+<!-- Contenido del bloque header20_content -->
+{% block header20_content %}
+<div class="row">
+  <h1 class="text-center mb-4">Crear Nueva Tarea</h1>
+  <div class="justify-content-around d-flex">
+    {% include "parciales/goto_index.html" %}
+    <!-- Incluye el botón para ver tareas -->
+    {% include "parciales/goto_ver_tareas.html" %}
+  </div>
+</div>
+{% endblock header20_content %}
 <!-- Inicio del bloque de contenido -->
 {% block content %}
-<header class="sticky-top bg-warning altura-20 d-flex align-items-center">
-  <div class="container">
-    <div class="row">
-      <h1 class="text-center mb-4">Crear Nueva Tarea</h1>
-      <div class="justify-content-around d-flex">
-        <a class="btn btn-primary mb-3 col-5 col-md-3" href="{% url 'index' %}">
-          Volver al Inicio
-        </a>
-        <a
-          class="btn btn-primary mb-3 col-5 col-md-3"
-          href="{% url 'ver_tareas' %}"
-          >Ver Tareas
-        </a>
-      </div>
-    </div>
-  </div>
-</header>
 <main
   class="overflow-y-auto altura-80 bg-secondary text-white align-items-center d-flex justify-content-center"
 >

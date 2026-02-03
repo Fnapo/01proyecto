@@ -1,23 +1,20 @@
-{% extends "base.html" %} {% block title %} Editar Tarea {% endblock %}
+{% extends "base.html" %} {% block title %} Editar Tarea {% endblock %} {% set
+<!-- Inicio del bloque header20_content -->
+{% block header20_content %}
+<div class="row">
+  <h1 class="text-center mb-4">Editar Tarea</h1>
+  <div class="justify-content-around d-flex">
+    <a class="btn btn-primary mb-3 col-5 col-md-3" href="{% url 'index' %}">
+      Volver al Inicio
+    </a>
+    <a class="btn btn-primary mb-3 col-5 col-md-3" href="{% url 'ver_tareas' %}"
+      >Ver Tareas
+    </a>
+  </div>
+</div>
+{% endblock header20_content %}
 <!-- Inicio del bloque de contenido -->
 {% block content %}
-<header class="sticky-top bg-warning altura-20 d-flex align-items-center">
-  <div class="container">
-    <div class="row">
-      <h1 class="text-center mb-4">Editar Tarea</h1>
-      <div class="justify-content-around d-flex">
-        <a class="btn btn-primary mb-3 col-5 col-md-3" href="{% url 'index' %}">
-          Volver al Inicio
-        </a>
-        <a
-          class="btn btn-primary mb-3 col-5 col-md-3"
-          href="{% url 'ver_tareas' %}"
-          >Ver Tareas
-        </a>
-      </div>
-    </div>
-  </div>
-</header>
 <main
   class="overflow-y-auto altura-80 bg-secondary text-white align-items-center d-flex justify-content-center"
 >
@@ -53,15 +50,15 @@
         <label for="proyecto_id" class="form-label">Proyecto Asociado:</label>
         <select name="proyecto_id" class="form-select" id="proyecto_id">
           {% for proyecto in proyectos %}
-          <option
-            value="{{ proyecto.id }}"
-            {% if proyecto.id == tarea.proyecto_id %}
-            selected
-            {% endif %}
-          >
+          <!-- Evaluar si es el proyecto asociado a la tarea -->
+          {% if proyecto.id == tarea.proyecto.id %}
+          <!-- Marcar como seleccionado -->
+          <option value="{{ proyecto.id }}" selected>
             {{ proyecto.nombre }}
           </option>
-          {% endfor %}
+          {% else %}
+          <option value="{{ proyecto.id }}">{{ proyecto.nombre }}</option>
+          {% endif %} {% endfor %}
         </select>
       </div>
       <div class="mb-3 d-flex justify-content-around">

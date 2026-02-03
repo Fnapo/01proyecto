@@ -2,6 +2,10 @@
   overflow: hidden;
 }
 
+.altura-100p {
+  height: 100%;
+}
+
 .altura-80p {
   height: 80%;
 }

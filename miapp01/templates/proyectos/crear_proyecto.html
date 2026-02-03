@@ -1,23 +1,15 @@
 {% extends "base.html" %} {% block title %} Crear Un Proyecto {% endblock %}
 <!-- Inicio del bloque de contenido -->
-{% block content %}
-<header class="sticky-top bg-warning altura-20 d-flex align-items-center">
-  <div class="container">
-    <div class="row">
-      <h1 class="text-center mb-4">Crear un Nuevo Proyecto</h1>
-      <div class="justify-content-around d-flex">
-        <a class="btn btn-primary mb-3 col-5 col-md-3" href="{% url 'index' %}">
-          Volver al Inicio
-        </a>
-        <a
-          class="btn btn-primary mb-3 col-5 col-md-3"
-          href="{% url 'ver_proyectos' %}"
-          >Ver Proyectos
-        </a>
-      </div>
-    </div>
+{% block header20_content %}
+<div class="row">
+  <h1 class="text-center mb-4">Crear un Nuevo Proyecto</h1>
+  <div class="justify-content-around d-flex">
+    {% include "parciales/goto_index.html" %}
+    <!--  -->
+    {% include "parciales/goto_ver_proyectos.html" %}
   </div>
-</header>
+</div>
+{% endblock header20_content %} {% block content %}
 <main
   class="overflow-y-auto altura-80 bg-secondary text-white align-items-center d-flex justify-content-center"
 >

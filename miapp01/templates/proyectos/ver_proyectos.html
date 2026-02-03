@@ -1,27 +1,21 @@
 {% extends "base.html" %} {% block title %} Ver Proyectos {% endblock %}
 <!-- Inicio del bloque de contenido -->
-{% block content %} {% with matriz="111111111111111" %}
-<header class="sticky-top bg-warning altura-20 d-flex align-items-center">
-  <div class="container">
-    <div class="row">
-      <h1 class="text-center mb-4">Página de Proyectos</h1>
-      <div class="justify-content-around d-flex">
-        <a class="btn btn-primary mb-3 col-5 col-md-3" href="{% url 'index' %}">
-          Volver al Inicio
-        </a>
-        <a
-          class="btn btn-primary mb-3 col-5 col-md-3"
-          href="{% url 'crear_proyecto' %}"
-          >Crear Proyecto
-        </a>
-      </div>
-    </div>
+{% block header20_content %}
+<div class="row">
+  <h1 class="text-center mb-4">Página de Proyectos</h1>
+  <div class="justify-content-around d-flex">
+    {% include "parciales/goto_index.html" %}
+    <!--  -->
+    {% include "parciales/goto_crear_proyecto.html" %}
   </div>
-</header>
+</div>
+{% endblock header20_content %} {% block content %}
+<!-- Inicio del bloque de contenido -->
+{% with matriz="111111111111111" %}
 <main class="overflow-y-auto altura-80 bg-secondary text-white">
-  <!-- inicio if -->
-  {% if proyectos %}
   <div class="container">
+    <!-- inicio if -->
+    {% if proyectos %}
     <table class="table table-striped">
       <thead class="sticky-top">
         <tr>
@@ -41,8 +35,9 @@
             <a
               class="btn btn-warning"
               href="{% url 'editar_proyecto' proyecto.id %}"
-              >Editar</a
             >
+              Editar
+            </a>
           </td>
         </tr>
         {% endfor %}
@@ -50,10 +45,10 @@
         {% endfor %}
       </tbody>
     </table>
+    {% else %}
+    <p>No hay proyectos disponibles.</p>
+    {% endif %}
   </div>
-  {% else %}
-  <p>No hay proyectos disponibles.</p>
-  {% endif %}
 </main>
 <!-- fin bloque  -->
-{% endwith %} {% endblock %}
+{% endwith %} {% endblock content %}

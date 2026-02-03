@@ -1,58 +1,55 @@
 {% extends "base.html" %} {% block title %} Ver Tareas {% endblock %}
 
+<!-- Contenido del bloque header_content -->
+{% block header20_content %}
+<div class="row">
+  <h1 class="text-center mb-4">Página de Tareas</h1>
+  <div class="justify-content-around d-flex">
+    <!-- Include para el botón "Volver al Inicio" -->
+    {% include "parciales/goto_index.html" %}
+    <!-- Include para el botón "Crear Tarea" -->
+    {% include "parciales/goto_crear_tarea.html" %}
+  </div>
+</div>
+{% endblock header20_content %}
 <!-- Inicio del bloque de contenido -->
 {% block content %}
-<header class="sticky-top bg-warning altura-20 d-flex align-items-center">
-  <div class="container">
-    <div class="row">
-      <h1 class="text-center mb-4">Página de Tareas</h1>
-      <div class="justify-content-around d-flex">
-        <a class="btn btn-primary mb-3 col-5 col-md-3" href="{% url 'index' %}">
-          Volver al Inicio
-        </a>
-        <a
-          class="btn btn-primary mb-3 col-5 col-md-3"
-          href="{% url 'crear_tarea' %}"
-          >Crear Tarea
-        </a>
-      </div>
-    </div>
-  </div>
-</header>
 <main class="overflow-y-auto altura-80 bg-secondary text-white">
-  <!-- inicio if -->
-  {% if tareas %}
   <div class="container">
-    <table class="table table-striped">
-      <thead class="sticky-top">
-        <tr>
-          <th>ID</th>
-          <th>Título</th>
-          <th>Proyecto</th>
-          <th>Acciones</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for tarea in tareas %}
-        <tr>
-          <td>{{ tarea.id }}</td>
-          <td>{{ tarea.titulo }}</td>
-          <td>{{ tarea.proyecto_id }}</td>
-          <td>
-            <a
-              class="btn btn-sm btn-warning"
-              href="{% url 'editar_tarea' tarea.id %}"
-              >Editar</a
-            >
-          </td>
-        </tr>
-        {% endfor %}
-      </tbody>
-    </table>
-  </div>
-  {% else %}
-  <div class="container h-100 d-flex justify-content-center align-items-center">
-    <p>No hay tareas disponibles.</p>
+    <!-- inicio if -->
+    {% if tareas %}
+    <div class="table-responsive">
+      <table class="table table-striped">
+        <thead class="sticky-top">
+          <tr>
+            <th>ID</th>
+            <th>Título</th>
+            <th>Proyecto</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for tarea in tareas %}
+          <tr>
+            <td>{{ tarea.id }}</td>
+            <td>{{ tarea.titulo }}</td>
+            <td>{{ tarea.proyecto_id }}</td>
+            <td>
+              <a
+                class="btn btn-sm btn-warning"
+                href="{% url 'editar_tarea' tarea.id %}"
+                >Editar</a
+              >
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    {% else %}
+    <div class="h-100 d-flex justify-content-center align-items-center">
+      <p>No hay tareas disponibles.</p>
+    </div>
   </div>
 </main>
 {% endif %} {% endblock %}
