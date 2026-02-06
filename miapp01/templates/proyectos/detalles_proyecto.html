@@ -1,0 +1,42 @@
+{% extends "base.html" %} {% block title %} Ver Proyecto {% endblock %}
+<!-- Inicio del bloque header20_content -->
+{% block header20_content %}
+<div class="row">
+  <h1 class="text-center mb-4">Detalles de un Proyecto</h1>
+  <div class="justify-content-around d-flex">
+    {% include "parciales/goto_index.html" %}
+    <!--  -->
+    {% include "parciales/goto_ver_proyectos.html" %}
+  </div>
+</div>
+{% endblock header20_content %}
+<!-- Inicio del bloque de contenido -->
+{% block content %}
+<div class="align-items-center d-flex justify-content-center h-100">
+  <div class="container bg-light text-dark p-4 rounded">
+    {% if proyecto %}
+    <!-- Incluir el parcial para mostrar los detalles del proyecto -->
+    {% include "parciales/ver_proyecto.html" with proyecto=proyecto %}
+    <div class="mb-3 d-flex justify-content-around">
+      <a
+        href="{% url 'editar_proyecto' proyecto.id %}"
+        class="btn btn-primary col-4 col-md-3"
+      >
+        Editar Proyecto
+      </a>
+      <a
+        href="{% url 'eliminar_proyecto' proyecto.id %}"
+        class="btn btn-danger col-4 col-md-3"
+      >
+        Eliminar Proyecto
+      </a>
+    </div>
+  </div>
+  {% else %}
+  <div class="alert alert-warning" role="alert">
+    No se encontró el proyecto solicitado.
+  </div>
+  {% endif %}
+</div>
+<!-- fin bloque  -->
+{% endblock %}

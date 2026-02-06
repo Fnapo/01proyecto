@@ -10,46 +10,57 @@
     <!-- Include para el botón "Crear Tarea" -->
     {% include "parciales/goto_crear_tarea.html" %}
   </div>
+  {% include "parciales/filtro_nombre.html" %}
 </div>
 {% endblock header20_content %}
 <!-- Inicio del bloque de contenido -->
 {% block content %}
-<main class="overflow-y-auto altura-80 bg-secondary text-white">
-  <div class="container">
-    <!-- inicio if -->
-    {% if tareas %}
-    <div class="table-responsive">
-      <table class="table table-striped">
-        <thead class="sticky-top">
-          <tr>
-            <th>ID</th>
-            <th>Título</th>
-            <th>Proyecto</th>
-            <th>Acciones</th>
-          </tr>
-        </thead>
-        <tbody>
-          {% for tarea in tareas %}
-          <tr>
-            <td>{{ tarea.id }}</td>
-            <td>{{ tarea.titulo }}</td>
-            <td>{{ tarea.proyecto_id }}</td>
-            <td>
-              <a
-                class="btn btn-sm btn-warning"
-                href="{% url 'editar_tarea' tarea.id %}"
-                >Editar</a
-              >
-            </td>
-          </tr>
-          {% endfor %}
-        </tbody>
-      </table>
-    </div>
-    {% else %}
-    <div class="h-100 d-flex justify-content-center align-items-center">
-      <p>No hay tareas disponibles.</p>
-    </div>
-  </div>
-</main>
+<!-- inicio if -->
+{% if tareas %}
+<div class="table-responsive">
+  <table class="table table-striped">
+    <thead class="sticky-top">
+      <tr>
+        <th>ID</th>
+        <th>Título</th>
+        <th>Proyecto</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for tarea in tareas %}
+      <tr>
+        <td>{{ tarea.id }}</td>
+        <td>{{ tarea.titulo }}</td>
+        <td>{{ tarea.proyecto_id }}</td>
+        <td class="d-flex justify-content-around">
+          <a
+            class="btn btn-sm btn-warning"
+            href="{% url 'editar_tarea' tarea.id %}"
+            >Editar</a
+          >
+          <a
+            class="btn btn-sm btn-success"
+            href="{% url 'detalles_tarea' tarea.id %}"
+            >Detalles</a
+          >
+          <a
+            class="btn btn-sm btn-danger"
+            href="{% url 'eliminar_tarea' tarea.id %}"
+            >Eliminar</a
+          >
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% else %}
+<div class="h-100 d-flex justify-content-center align-items-center">
+  <p>
+    No hay tareas disponibles {% if filtro %} con el filtro "{{ filtro }}"
+    <!---->
+    {% endif %}...
+  </p>
+</div>
 {% endif %} {% endblock %}

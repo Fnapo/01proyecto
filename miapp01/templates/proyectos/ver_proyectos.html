@@ -8,47 +8,62 @@
     <!--  -->
     {% include "parciales/goto_crear_proyecto.html" %}
   </div>
+  {% include "parciales/filtro_nombre.html" %} {% endblock header20_content %}
 </div>
-{% endblock header20_content %} {% block content %}
+{% block content %}
 <!-- Inicio del bloque de contenido -->
-{% with matriz="111111111111111" %}
-<main class="overflow-y-auto altura-80 bg-secondary text-white">
-  <div class="container">
-    <!-- inicio if -->
-    {% if proyectos %}
-    <table class="table table-striped">
-      <thead class="sticky-top">
-        <tr>
-          <th>ID</th>
-          <th>Nombre</th>
-          <th>Acciones</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for veces in matriz %}
-        <!-- Comentario -->
-        {% for proyecto in proyectos %}
-        <tr>
-          <td>{{ proyecto.id }}</td>
-          <td>{{ proyecto.nombre }}</td>
-          <td>
-            <a
-              class="btn btn-warning"
-              href="{% url 'editar_proyecto' proyecto.id %}"
-            >
-              Editar
-            </a>
-          </td>
-        </tr>
-        {% endfor %}
-        <!-- Comentario -->
-        {% endfor %}
-      </tbody>
-    </table>
-    {% else %}
-    <p>No hay proyectos disponibles.</p>
-    {% endif %}
-  </div>
-</main>
+{% with matriz="111111111111" %}
+<!-- inicio if -->
+{% if proyectos %}
+<table class="table table-striped">
+  <thead class="sticky-top">
+    <tr>
+      <th>ID</th>
+      <th>Nombre</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for veces in matriz %}
+    <!-- Comentario -->
+    {% for proyecto in proyectos %}
+    <tr>
+      <td>{{ proyecto.id }}</td>
+      <td>{{ proyecto.nombre }}</td>
+      <td class="d-flex justify-content-around">
+        <a
+          class="btn btn-warning"
+          href="{% url 'editar_proyecto' proyecto.id %}"
+        >
+          Editar
+        </a>
+        <a
+          class="btn btn-success"
+          href="{% url 'detalles_proyecto' proyecto.id %}"
+        >
+          Detalles
+        </a>
+        <a
+          class="btn btn-danger"
+          href="{% url 'eliminar_proyecto' proyecto.id %}"
+        >
+          Eliminar 
+        </a>
+      </td>
+    </tr>
+    {% endfor %}
+    <!-- Comentario -->
+    {% endfor %}
+  </tbody>
+</table>
+{% else %}
+<div class="d-flex justify-content-center align-items-center h-100">
+  <p>
+    No hay proyectos disponibles {% if filtro %} con el filtro "{{ filtro }}"
+    <!---->
+    {%endif %}...
+  </p>
+</div>
+{% endif %}
 <!-- fin bloque  -->
 {% endwith %} {% endblock content %}

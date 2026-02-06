@@ -25,11 +25,18 @@ def proyectos(request):
 
 
 def ver_proyectos(request):
-    proyectos = Proyecto.objects.values()
+    if request.method == "POST":
+        filtro = request.POST.get("filtro")
+        proyectos = Proyecto.objects.filter(nombre__icontains=filtro).values()
+    else:
+        proyectos = Proyecto.objects.values()
     return render(
         request,
         "proyectos/ver_proyectos.html",
-        {"proyectos": proyectos},
+        {
+            "proyectos": proyectos,
+            "filtro": filtro if request.method == "POST" else None,
+        },
     )
 
 
@@ -63,6 +70,19 @@ def crear_proyecto(request):
     return render(request, "proyectos/crear_proyecto.html")
 
 
+def detalles_proyecto(request, proyecto_id):
+    try:
+        proyecto = Proyecto.objects.get(id=proyecto_id)
+        return render(
+            request, "proyectos/detalles_proyecto.html", {"proyecto": proyecto}
+        )
+    except Proyecto.DoesNotExist:
+        return JsonResponse(
+            {"error": "Proyecto no encontrado"},
+            status=404,
+        )
+
+
 def editar_proyecto(request, proyecto_id):
     try:
         proyecto = Proyecto.objects.get(id=proyecto_id)
@@ -81,6 +101,22 @@ def editar_proyecto(request, proyecto_id):
     return render(request, "proyectos/editar_proyecto.html", {"proyecto": proyecto})
 
 
+def eliminar_proyecto(request, proyecto_id):
+    try:
+        proyecto = Proyecto.objects.get(id=proyecto_id)
+        if request.method == "POST":
+            proyecto.delete()
+            return redirect("ver_proyectos")
+        return render(
+            request, "proyectos/eliminar_proyecto.html", {"proyecto": proyecto}
+        )
+    except Proyecto.DoesNotExist:
+        return JsonResponse(
+            {"error": "Proyecto no encontrado"},
+            status=404,
+        )
+
+
 def tareas(request):
     lista_tareas = list(Tarea.objects.values())
     return JsonResponse(
@@ -90,11 +126,15 @@ def tareas(request):
 
 
 def ver_tareas(request):
-    tareas = Tarea.objects.values()
+    if request.method == "POST":
+        filtro = request.POST.get("filtro")
+        tareas = Tarea.objects.filter(titulo__icontains=filtro).values()
+    else:
+        tareas = Tarea.objects.values()
     return render(
         request,
         "tareas/ver_tareas.html",
-        {"tareas": tareas},
+        {"tareas": tareas, "filtro": filtro if request.method == "POST" else None},
     )
 
 
@@ -133,6 +173,31 @@ def editar_tarea(request, tarea_id):
     return render(
         request, "tareas/editar_tarea.html", {"tarea": tarea, "proyectos": proyectos}
     )
+
+
+def detalles_tarea(request, tarea_id):
+    try:
+        tarea = Tarea.objects.get(id=tarea_id)
+        return render(request, "tareas/detalles_tarea.html", {"tarea": tarea})
+    except Tarea.DoesNotExist:
+        return JsonResponse(
+            {"error": "Tarea no encontrada"},
+            status=404,
+        )
+
+
+def eliminar_tarea(request, tarea_id):
+    try:
+        tarea = Tarea.objects.get(id=tarea_id)
+        if request.method == "POST":
+            tarea.delete()
+            return redirect("ver_tareas")
+        return render(request, "tareas/eliminar_tarea.html", {"tarea": tarea})
+    except Tarea.DoesNotExist:
+        return JsonResponse(
+            {"error": "Tarea no encontrada"},
+            status=404,
+        )
 
 
 def buscar_tarea(request, tarea_id):

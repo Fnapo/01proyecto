@@ -12,35 +12,19 @@
 {% endblock header20_content %}
 <!-- Inicio del bloque de contenido -->
 {% block content %}
-<main
-  class="overflow-y-auto altura-80 bg-secondary text-white align-items-center d-flex justify-content-center"
->
+<div class="align-items-center d-flex justify-content-center h-100">
   <div class="container bg-light text-dark p-4 rounded">
     <form method="post" action="{% url 'editar_proyecto' proyecto.id %}">
       {% csrf_token %}
       <div class="mb-3">
         <label for="nombre" class="form-label">Nombre del Proyecto:</label>
-        <input
-          type="text"
-          class="form-control"
-          id="nombre"
-          name="nombre"
-          maxlength="250"
-          value="{{ proyecto.nombre }}"
-          required
-        />
+        <input type="text" class="form-control" id="nombre" name="nombre" maxlength="250" value="{{ proyecto.nombre }}"
+          required />
       </div>
       <div class="mb-3">
         <label for="descripcion" class="form-label">Descripción:</label>
-        <textarea
-          class="form-control"
-          id="descripcion"
-          name="descripcion"
-          rows="4"
-          required
-        >
-{{ proyecto.descripcion }}</textarea
-        >
+        <textarea class="form-control" id="descripcion" name="descripcion" rows="4" required>
+{{ proyecto.descripcion }}</textarea>
       </div>
       <div class="mb-3 d-flex justify-content-around">
         <button type="submit" class="btn btn-success col-4 col-md-3">
@@ -52,6 +36,6 @@
       </div>
     </form>
   </div>
-</main>
+</div>
 <!-- fin bloque  -->
 {% endblock %}

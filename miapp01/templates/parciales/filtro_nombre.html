@@ -1,0 +1,14 @@
+  <div class="col-12 d-flex justify-content-center">
+    <div class="mb-3 col-lg-6 col-sm-12">
+      <form method="post" action="">
+        {% csrf_token %}
+        <div class="row">
+          <div class="col-8">
+            <input type="text" name="filtro" class="form-control mb-2" placeholder="Filtro por nombre o título" />
+          </div>
+          <div class="col-4">
+            <button type="submit" class="btn btn-primary w-100">Filtrar</button>
+          </div>
+      </form>
+    </div>
+  </div>

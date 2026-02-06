@@ -1,0 +1,42 @@
+{% extends "base.html" %} {% block title %} Eliminar Tarea {% endblock %}
+<!-- Inicio del bloque header20_content -->
+{% block header20_content %}
+<div class="row">
+  <h1 class="text-center mb-4">Eliminar una Tarea</h1>
+  <div class="justify-content-around d-flex">
+    {% include "parciales/goto_index.html" %}
+    <!--  -->
+    {% include "parciales/goto_ver_tareas.html" %}
+  </div>
+</div>
+{% endblock header20_content %}
+<!-- Inicio del bloque de contenido -->
+{% block content %}
+<div class="align-items-center d-flex justify-content-center h-100">
+  <div class="container bg-light text-dark p-4 rounded">
+    {% if tarea %}
+    <form method="post" action="{% url 'eliminar_tarea' tarea.id %}">
+      {% csrf_token %}
+      <!-- Incluir el parcial para mostrar los detalles de la tarea a eliminar -->
+      {% include "parciales/ver_tarea.html" with tarea=tarea %}
+      <div class="mb-3 d-flex justify-content-around">
+        <button type="submit" class="btn btn-danger col-4 col-md-3">
+          Confirmar Eliminación
+        </button>
+        <a
+          href="{% url 'editar_tarea' tarea.id %}"
+          class="btn btn-primary col-4 col-md-3"
+        >
+          Editar la Tarea
+        </a>
+      </div>
+    </form>
+    {% else %}
+    <div class="alert alert-warning" role="alert">
+      No se encontró la tarea solicitada.
+    </div>
+    {% endif %}
+  </div>
+</div>
+<!-- fin bloque  -->
+{% endblock %}
