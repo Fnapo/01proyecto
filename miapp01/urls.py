@@ -3,7 +3,7 @@ from . import views
 
 ulrspatterns = [
     path("hola/<str:nombre>/", views.hola),
-    path("", views.hola),
+    path("", views.index, name="home"),
     path("index", views.index, name="index"),
     path("proyectos/", views.proyectos, name="proyectos"),  # el name para hrefs
     path("proyectos/<int:proyecto_id>/", views.buscar_proyecto),
